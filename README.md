@@ -15,17 +15,17 @@ install.packages("shiny")
 ### Clone the repository
 Using HTTPS:
 ```bash
-git clone https://github.com/nicolelink33/532_IA.git
+git clone https://github.com/nicolelink33/532_IA_California_housing_R.git
 ```
 
 Or using SSH:
 ```bash
-git clone git@github.com:nicolelink33/532_IA.git
+git clone git@github.com:nicolelink33/532_IA_California_housing_R.git
 ```
 
 In RStudio session, navigate to the project root:
 ```R
-setwd("532_IA")
+setwd("532_IA_California_housing_R")
 ```
 
 Launch the dashboard
