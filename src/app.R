@@ -9,7 +9,6 @@ processed_data <- read_csv("../data/processed/housing_with_county.csv")
 subset_df <- processed_data |>
   select(median_house_value, ocean_proximity)
 
-
 # page setup
 ui <- page_sidebar(
   # App title ----
@@ -35,7 +34,7 @@ ui <- page_sidebar(
   # Output 1: Value box ----
   value_box(
     title="Median house value",
-    value=textOutput("median_value")
+    value=uiOutput("median_value")
   ),
   
   # Output 2: Density plot ----
@@ -47,6 +46,8 @@ ui <- page_sidebar(
 
 # server
 server <- function(input, output, session) {
+  
+  state_median <- median(subset_df$median_house_value, na.rm = TRUE)
 
   # Filter data
   filtered_df <- reactive({
@@ -55,11 +56,37 @@ server <- function(input, output, session) {
     subset_df |>
       filter(ocean_proximity %in% input$ocean)
   })
+  
+  # Percent difference output
+  percent_diff <- reactive({
+    # Calculate median value of filtered data
+    filtered_median <- median(filtered_df()$median_house_value, na.rm = TRUE)
     
-  # Median value output
-  output$median_value <- renderText({
-    scales::dollar(median(filtered_df()$median_house_value, na.rm=TRUE))
+    #Calculate percent difference between filtered and overall state
+    ((filtered_median - state_median) / state_median) * 100
   })
+  
+  output$median_value <- renderUI({
+    # Calculate median value of filtered data and percent difference
+    filtered_median <- median(filtered_df()$median_house_value, na.rm = TRUE)
+    
+    percent <- percent_diff()
+    arrow <- if (percent >= 0) "↑" else "↓"
+    percent <- round(abs(percent), 1)
+    
+    # used ChatGPT to assist with the below formatting
+    tagList(
+      div(
+        style = "font-size:28px; font-weight:600;",
+        scales::dollar(filtered_median)
+      ),
+      div(
+        style = paste0("font-size:18px; color:grey"),
+        paste0(arrow, " ", percent, "% from state median value")
+      )
+    )
+  })
+  
   
   # Density plot
   output$density_Plot <- renderPlot({
@@ -86,18 +113,13 @@ server <- function(input, output, session) {
           "Filtered Houses" = "lightblue"
         )
       ) +
-      
       scale_x_continuous(labels = scales::dollar) +
-      
       labs(
         x = "House Value",
         y = "Density",
         fill = "Data"
       )
-    
   })
-  
 }
-
 
 shinyApp(ui = ui, server = server)
