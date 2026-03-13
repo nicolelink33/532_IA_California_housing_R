@@ -23,7 +23,7 @@ Open a new RStudio session and navigate to the project root by going to `Select`
 
 Install the required packages by running:
 ```R
-install.packages(c("shiny", "bslib", "readr", "dplyr", "ggplot2", "scales", "rsconnect"))
+install.packages(c("shiny", "bslib", "readr", "dplyr", "ggplot2", "scales"))
 ```
 
 ### Launch the dashboard
