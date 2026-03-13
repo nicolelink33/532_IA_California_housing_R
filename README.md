@@ -3,7 +3,7 @@
 An interactive dashboard for exploring how proximity to the ocean impacts housing prices in California (1990). This dashboard uses publicly available data from Kaggle (https://www.kaggle.com/datasets/camnugent/california-housing-prices). 
 
 
-**Live dashboar:** <https://019ce8b5-0595-235d-b56f-5465ae351985.share.connect.posit.cloud/>
+**Live dashboard:** <https://019ce8b5-0595-235d-b56f-5465ae351985.share.connect.posit.cloud/>
 
 
 ## Run locally
