@@ -30,7 +30,7 @@ install.packages(c("shiny", "bslib", "readr", "dplyr", "ggplot2", "scales", "rsc
 Open `app.R` and click `Run App`, or run the following in the RStudio Console:
 ```R
 library(shiny)
-runApp("src")
+runApp()
 ```
 
 You can view the dashboard in the RStudio pop up or at: http://127.0.0.1:7496.

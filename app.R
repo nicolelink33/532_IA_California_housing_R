@@ -5,7 +5,7 @@ library(dplyr)
 library(ggplot2)
 
 # Load the data
-processed_data <- read_csv("../data/processed/housing_with_county.csv")
+processed_data <- read_csv("data/processed/housing_with_county.csv")
 subset_df <- processed_data |>
   select(median_house_value, ocean_proximity)
 
